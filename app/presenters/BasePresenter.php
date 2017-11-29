@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use Nette;
 use App\Model;
+use Nette\Application\UI\Form;
 
 
 /**
@@ -27,14 +28,14 @@ class BasePresenter extends Nette\Application\UI\Presenter
     
     public function createComponentAddDogModalForm() {
         
-        $form = new \Nette\Application\UI\Form;
+        $form = new Form;
         $form->addText('regNr', 'Číslo známky');
         $form->addText('name', 'Jméno');
         $form->addSelect('sex_id', 'Pohlaví', $this->sex->findAll()->fetchPairs('id', 'name'))->setPrompt('Vyberte pohlaví')->setRequired('Pohlaví musí být vybráno');
         $form->addSelect('breed', 'Rasa', $this->breed->findAll()->fetchPairs('id', 'name'))->setPrompt('Vyberte rasu')->setRequired('Rasa musí být vybrána');
         $form->addSelect('breed2', 'Rasa 2', $this->breed->findAll()->fetchPairs('id', 'name'))->setPrompt('Vyberte rasu');
         $form->addSelect('state_id', 'Stav', $this->state->findAll()->where('id != 1')->fetchPairs('id', 'state'))->setRequired('Stav musí být vyplněn');
-        $form->addUpload('photo', 'Fotografie');
+        $form->addUpload('photo', 'Fotografie')->addRule(Form::IMAGE, 'Nahrejte prosím obrázkový soubor');
         $form->addText('contact', 'Kontakt')->setRequired('Kontakt musí být vyplněn');
         $form->addSubmit('submit', 'Přidat');
         $form->onSuccess[] = $this->proceedAddForm;
