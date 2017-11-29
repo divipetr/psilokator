@@ -1,0 +1,158 @@
+/* 
+    Created on : Nov 13, 2017, 8:39:26 AM
+    Author     : divispet
+*/
+
+html { 
+  background: url(../images/background.JPG) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+    background: transparent;
+}
+
+.navbar-default {
+    border: none;
+}
+
+.navbar-brand{
+    color: #FFFFFF!important;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 1px;
+    background: #eea236!important;
+    border-radius: 5px 25px 5px 25px;
+}
+
+
+.navbar-custom {
+    background: transparent;
+    margin-top: 25px;
+}
+
+.panel {
+    background: none;
+}
+
+
+.alpha75 {
+    background: rgba(255, 255, 255, .75);
+}
+
+.searchBox {
+    text-align: center;
+    background: rgba(255, 255, 255, .5);
+}
+
+hr.danger {
+    border-color: #a94442;
+}
+
+hr.success {
+    border-color: #3c763d;
+}
+
+.panel-danger {
+    border-color: #a94442;
+}
+
+.panel-danger > .panel-heading {
+    color: #fff;
+    background-color: #a94442;
+    border-color: #a94442;
+}
+
+.panel-success {
+    border-color: #3c763d;
+}
+
+.panel-success > .panel-heading {
+    color: #fff;
+    background-color: #3c763d;
+    border-color: #3c763d;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #eea236;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #eea236;
+}
+
+.navbar-nav .navbar-right > li {
+    margin-left: 5px;
+}
+
+.bubble {
+    border-radius: 5px 25px 5px 25px;
+    margin-left: 5px;
+}
+
+.bubble > a {
+    color: #FFFFFF!important;
+}
+
+.bubble.red {
+    background: #FF0000;
+}
+
+.bubble.orange {
+    background: #EEA236;
+}
+
+.navBtn {
+    line-height: 20px;
+    padding: 15px;
+    border: none;
+    color: #FFFFFF;
+    outline: none;
+}
+
+.modal-footer {
+    font-size: 10px;
+    text-align: center;
+}
+
+.fadein{
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+

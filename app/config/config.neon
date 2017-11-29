@@ -1,0 +1,38 @@
+parameters:
+	security:
+		salt: "wfxfWQLSPHHsAgnePnIjrH"
+
+php:
+	date.timezone: Europe/Prague
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+services:
+	authenticator:
+		class: App\Model\Security\CustomAuthenticator
+		arguments: [ @webuser, %security.salt% ]
+	- App\Forms\FormFactory
+	- App\Forms\SignFormFactory
+	breed: App\Model\Breed
+	contact: App\Model\Contact
+	dog: App\Model\Dog
+	dogService: App\Model\DogService
+	dogbreed: App\Model\DogBreed
+	dogcontact: App\Model\DogContact
+	foundpet: App\Model\FoundPet
+	lostpet: App\Model\LostPet
+	payment: App\Model\Payment
+	photo: App\Model\Photo
+	sex: App\Model\Sex
+	state: App\Model\State
+	webuser: App\Model\WebUser
+	router: App\RouterFactory::createRouter
