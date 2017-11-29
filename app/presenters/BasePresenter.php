@@ -34,6 +34,8 @@ class BasePresenter extends Nette\Application\UI\Presenter
         $form->addSelect('breed', 'Rasa', $this->breed->findAll()->fetchPairs('id', 'name'))->setPrompt('Vyberte rasu')->setRequired('Rasa musí být vybrána');
         $form->addSelect('breed2', 'Rasa 2', $this->breed->findAll()->fetchPairs('id', 'name'))->setPrompt('Vyberte rasu');
         $form->addSelect('state_id', 'Stav', $this->state->findAll()->where('id != 1')->fetchPairs('id', 'state'))->setRequired('Stav musí být vyplněn');
+        $form->addUpload('photo', 'Fotografie');
+        $form->addText('contact', 'Kontakt')->setRequired('Kontakt musí být vyplněn');
         $form->addSubmit('submit', 'Přidat');
         $form->onSuccess[] = $this->proceedAddForm;
         

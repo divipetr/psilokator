@@ -55,10 +55,6 @@
                 <div class="modal-body">
                     {snippet addDogModalWrapper}
                         {form addDogModalForm, role=>'form', class=>''}
-                            <ul class=error n:if="$form->ownErrors">
-                                <li n:foreach="$form->ownErrors as $error">{$error}</li>
-                            </ul>
-
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -72,12 +68,10 @@
                                     <div class="form-group">
                                         {label sex_id, class=>'control-label', /}
                                         {input sex_id, class=>'form-control'}
-                                        <span class=error n:ifcontent>{$form['sex_id']->error}</span>
                                     </div>
                                     <div class="form-group">
                                         {label breed, class=>'control-label', /}
                                         {input breed, class=>'form-control'}
-                                        <span class=error n:ifcontent>{$form['breed']->error}</span>
                                     </div>
                                     <div class="form-group">
                                         {label breed2, class=>'control-label', /}
@@ -86,13 +80,28 @@
                                     <div class="form-group">
                                         {label state_id, class=>'control-label', /}
                                         {input state_id, class=>'form-control'}
-                                        <span class=error n:ifcontent>{$form['state_id']->error}</span>
                                     </div>
                                 </div>
-                                    <div class="col-lg-6">
-
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {label photo, class=>'control-label', /}
+                                        <img src="{$basePath}/images/background.jpg" class="img img-responsive img-center img-rounded">
                                     </div>
-
+                                    <div class="form-group" style="margin-top:20px;">
+                                        <div class="input-group">
+                                            <label class="input-group-btn">
+                                                <span class="btn btn-primary">
+                                                    Vybrat&hellip; {input photo class=>'hidden'}
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {label contact, class=>'control-label', /}
+                                        {input contact, class=>'form-control'}
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -121,6 +130,36 @@
             <script src="{$basePath}/js/nette.ajax.js"></script>
             <script src="{$basePath}/js/main.js"></script>
             <script src="{$basePath}/js/bootstrap.js"></script>
+            
+            <script type="text/javascript">
+                $(function() {
+
+                    // We can attach the `fileselect` event to all file inputs on the page
+                    $(document).on('change', ':file', function() {
+                      var input = $(this),
+                          numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                      input.trigger('fileselect', [numFiles, label]);
+                    });
+
+                    // We can watch for our custom `fileselect` event like this
+                    $(document).ready( function() {
+                        $(':file').on('fileselect', function(event, numFiles, label) {
+
+                            var input = $(this).parents('.input-group').find(':text'),
+                                log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                            if( input.length ) {
+                                input.val(log);
+                            } else {
+                                if( log ) alert(log);
+                            }
+
+                        });
+                    });
+
+                });
+            </script>
 	{/block}
 </body>
 </html>
