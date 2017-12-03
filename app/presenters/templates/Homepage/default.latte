@@ -10,7 +10,6 @@
                     Vyhledat pejska
                 </div>
                 <div class="panel-body searchBox">
-                    
                     {form fastSearch, role=>'form', class=>'ajax form-inline'}
                         <div class="form-group">
                             {input regNr, class=>'form-control'}
@@ -26,18 +25,22 @@
                         
                         {input submit, class=>"btn btn-primary float-right"}
                     {/form}
-                    
                 </div>
                     
                     
                         <div class="searchBox fade in">
                             <div class="container-fluid">
                                 {snippet fastSearchResult}
-                                <div n:foreach="$searchResult as $fp" class="col-lg-6">
+                                <div n:foreach="$searchResult as $fp" class="col-lg-4 col-md-4 col-sm-6">
                                     <div class="media">
                                         <div class="media-left">
                                             <a href="#">
-                                                <img class="media-object" src="{$basePath}/images/background.jpg" alt="..." width="128" height="128"> 
+                                                {if $fp->photo}
+                                                    <img class="media-object img img-rounded" src="{$fp->photo->image|dataStream}" alt="..." width="96" height="96">
+                                                {else}
+                                                    <img class="media-object img img-rounded" src="{$basePath}/images/background.jpg" alt="..." width="96" height="96"> 
+                                                {/if}
+
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -47,7 +50,19 @@
                                                     <small>{$fp->timestamp}</small>
                                                 </span>
                                             </h4>
-                                          ..
+                                            <p>
+                                                Číslo známky: {$fp->regnr}
+                                            </p>
+                                            <p>
+                                                Pohlaví: <i class="fa fa-{$fp->sex->id == 1 ? 'mars' : 'venus'}"></i>
+                                            </p>
+                                            <p>
+                                                Rasa: 
+                                                {foreach $fp->related('dog_has_breed') as $dogBreed}
+                                                    {if !$iterator->first && $iterator->last} X {/if}
+                                                    {$dogBreed->breed->name}
+                                                {/foreach}
+                                            </p>
                                         </div>
                                     </div>
 
@@ -76,6 +91,8 @@
                                 <a href="#">
                                     {if $lp->photo}
                                         <img class="media-object" src="{$lp->photo->image|dataStream}" alt="..." width="96" height="96"> 
+                                    {else}
+                                        <img class="media-object" src="{$basePath}/images/background.jpg" alt="..." width="96" height="96"> 
                                     {/if}
                                 </a>
                             </div>
@@ -122,7 +139,12 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="{$basePath}/images/background.jpg" alt="..." width="128" height="128"> 
+                                    {if $fp->photo}
+                                        <img class="media-object" src="{$fp->photo->image|dataStream}" alt="..." width="96" height="96">
+                                    {else}
+                                        <img class="media-object" src="{$basePath}/images/background.jpg" alt="..." width="96" height="96"> 
+                                    {/if}
+                                    
                                 </a>
                             </div>
                             <div class="media-body">
