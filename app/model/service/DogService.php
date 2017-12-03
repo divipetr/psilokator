@@ -17,8 +17,9 @@ class DogService extends \Nette\Object {
         $this->dog = $dog;
         $this->dogBreed = $dogBreed;
     }
+    
     public function insertDog($data) {
-        
+                
         $breedArray = array($data['breed'], $data['breed2']);
         unset($data['breed']);
         unset($data['breed2']);
@@ -36,7 +37,7 @@ class DogService extends \Nette\Object {
                 $this->dogBreed->insert(array('dog_id'=>$insertedDog->id, 'breed_id'=>$breed));
             }
         }
-        
+                
     }
     
 }
