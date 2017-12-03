@@ -74,7 +74,9 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="{$basePath}/images/background.jpg" alt="..." width="96" height="96"> 
+                                    {if $lp->photo}
+                                        <img class="media-object" src="{$lp->photo->image|dataStream}" alt="..." width="96" height="96"> 
+                                    {/if}
                                 </a>
                             </div>
                             <div class="media-body">
