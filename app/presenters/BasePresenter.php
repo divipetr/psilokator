@@ -25,6 +25,9 @@ class BasePresenter extends Nette\Application\UI\Presenter
     /** @var Model\DogService @inject*/
     public $dogService;
     
+    /** @var Model\Photo @inject*/
+    public $photo;
+    
     
     public function createComponentAddDogModalForm() {
         
@@ -35,7 +38,9 @@ class BasePresenter extends Nette\Application\UI\Presenter
         $form->addSelect('breed', 'Rasa', $this->breed->findAll()->fetchPairs('id', 'name'))->setPrompt('Vyberte rasu')->setRequired('Rasa musí být vybrána');
         $form->addSelect('breed2', 'Rasa 2', $this->breed->findAll()->fetchPairs('id', 'name'))->setPrompt('Vyberte rasu');
         $form->addSelect('state_id', 'Stav', $this->state->findAll()->where('id != 1')->fetchPairs('id', 'state'))->setRequired('Stav musí být vyplněn');
-        $form->addUpload('photo', 'Fotografie')->addRule(Form::IMAGE, 'Nahrejte prosím obrázkový soubor');
+        $form->addUpload('photo', 'Fotografie')
+                ->addCondition(Form::FILLED)
+                    ->addRule(Form::IMAGE, 'Nahrejte prosím obrázkový soubor');
         $form->addText('contact', 'Kontakt')->setRequired('Kontakt musí být vyplněn');
         $form->addSubmit('submit', 'Přidat');
         $form->onSuccess[] = $this->proceedAddForm;
@@ -48,9 +53,28 @@ class BasePresenter extends Nette\Application\UI\Presenter
         $array = $form->getValues();
         $data = $array;
         unset($array);
+                
+        $dogPhotoTmp = NULL;
+        if (isset($data['photo'])) {
+            $dogPhotoTmp = $data['photo'];
+            unset($data['photo']);
+        }
         
+        unset($data['contact']);
+        
+        $image_id = NULL;
+        
+        if ($dogPhotoTmp->isOk()) {
+            $dogPhoto = $dogPhotoTmp->toImage();
+            $image_id = $this->photo->insert(array('image'=>$dogPhoto))->id;
+        }
+        
+        if ($image_id !== NULL) {
+            $data['photo_id'] = $image_id;
+        }
+
         $this->dogService->insertDog($data);
-        
+                        
         $form->setValues(array(), TRUE);
         
         if ($this->isAjax()) {
