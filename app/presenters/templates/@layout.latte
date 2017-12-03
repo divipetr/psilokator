@@ -53,7 +53,6 @@
                   <h4 class="modal-title">Přidat pejska</h4>
                 </div>
                 <div class="modal-body">
-                    {snippet addDogModalWrapper}
                         {form addDogModalForm, role=>'form', class=>''}
                             <div class="row">
                                 <div class="col-lg-6">
@@ -111,7 +110,6 @@
                                 </div>
                             </div>
                         {/form}
-                    {/snippet}
                 </div>
                 <div class="modal-footer">
                     <span>Odesláním formuláře souhlasíte s <a>podmínkami serveru</a></span>
@@ -125,13 +123,15 @@
             &copy; 2017, PsíLokátor.cz
         </footer>
 	{block scripts}
-            <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-            <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+           <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+            <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>-->
+            <script src="{$basePath}/js/jquery-3.2.1.min.js"></script>
+            <script src="{$basePath}/js/netteForms.min.js"></script>
             <script src="{$basePath}/js/nette.ajax.js"></script>
             <script src="{$basePath}/js/main.js"></script>
             <script src="{$basePath}/js/bootstrap.js"></script>
             
-            <script type="text/javascript">
+            <script type="text/javascript" n:syntax="off">
                 $(function() {
 
                     // We can attach the `fileselect` event to all file inputs on the page
