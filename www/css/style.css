@@ -126,6 +126,14 @@ hr.success {
             animation: fadein 2s;
 }
 
+i.green {
+    color: #3C7601;
+}
+
+i.red {
+    color: #FF0000;
+}
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
